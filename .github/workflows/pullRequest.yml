@@ -24,7 +24,7 @@ jobs:
         with:
           path: |
             Build/Build/Products
-          key: ${{ runner.os }}-build-products-${{ hashFiles(format('{0}/**/xcshareddata/swiftpm/Package.resolved', env.APP_DIR)) }}
+          key: ${{ runner.os }}-build-products-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       - name: source-packages-artifacts
         uses: actions/cache@v2
@@ -32,7 +32,7 @@ jobs:
         with:
           path: |
             Build/SourcePackages/artifacts
-          key: ${{ runner.os }}-source-packages-artifacts-${{ hashFiles(format('{0}/**/xcshareddata/swiftpm/Package.resolved', env.APP_DIR)) }}
+          key: ${{ runner.os }}-source-packages-artifacts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       - name: source-packages-checkouts
         uses: actions/cache@v2
@@ -40,7 +40,7 @@ jobs:
         with:
           path: |
             Build/SourcePackages/checkouts
-          key: ${{ runner.os }}-source-packages-checkouts-${{ hashFiles(format('{0}/**/xcshareddata/swiftpm/Package.resolved', env.APP_DIR)) }}
+          key: ${{ runner.os }}-source-packages-checkouts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       - name: source-packages-repositories
         uses: actions/cache@v2
@@ -48,7 +48,7 @@ jobs:
         with:
           path: |
             Build/SourcePackages/repositories
-          key: ${{ runner.os }}-source-packages-repositories-${{ hashFiles(format('{0}/**/xcshareddata/swiftpm/Package.resolved', env.APP_DIR)) }}
+          key: ${{ runner.os }}-source-packages-repositories-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       - name: Run Tests (No Cache)
         if: steps.build-products.outputs.cache-hit != 'true'
