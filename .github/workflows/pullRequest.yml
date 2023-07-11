@@ -12,6 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # - name: Installing git-tools
+      #   run: |
+      #     brew install git-tools
+      
+      - name: Restoring repository timestamp
+        run: |
+          git restore-mtime --force
+
       - name: Install Bundler
         run: gem install bundler
 
