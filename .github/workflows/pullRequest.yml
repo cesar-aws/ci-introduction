@@ -18,37 +18,29 @@ jobs:
       - name: Install gems
         run: bundle install
 
-      # - name: workspace-state
-      #   uses: actions/cache@v2
-      #   id: workspace-state
-      #   with:
-      #     path: |
-      #       Build/SourcePackages/workspace-state.json
-      #     key: ${{ runner.os }}-workspace-state-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+      - name: workspace-state
+        uses: actions/cache@v2
+        id: workspace-state
+        with:
+          path: |
+            Build/SourcePackages/workspace-state.json
+          key: ${{ runner.os }}-workspace-state-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
-      # - name: build-products
-      #   uses: actions/cache@v2
-      #   id: build-products
-      #   with:
-      #     path: |
-      #       Build/Build/Products
-      #     key: ${{ runner.os }}-build-products-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+      - name: source-packages-artifacts
+        uses: actions/cache@v2
+        id: source-packages-artifacts
+        with:
+          path: |
+            Build/SourcePackages/artifacts
+          key: ${{ runner.os }}-source-packages-artifacts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
-      # - name: source-packages-artifacts
-      #   uses: actions/cache@v2
-      #   id: source-packages-artifacts
-      #   with:
-      #     path: |
-      #       Build/SourcePackages/artifacts
-      #     key: ${{ runner.os }}-source-packages-artifacts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
-
-      # - name: source-packages-checkouts
-      #   uses: actions/cache@v2
-      #   id: source-packages-checkouts
-      #   with:
-      #     path: |
-      #       Build/SourcePackages/checkouts
-      #     key: ${{ runner.os }}-source-packages-checkouts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+      - name: source-packages-checkouts
+        uses: actions/cache@v2
+        id: source-packages-checkouts
+        with:
+          path: |
+            Build/SourcePackages/checkouts
+          key: ${{ runner.os }}-source-packages-checkouts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       # - name: source-packages-repositories
       #   uses: actions/cache@v2
@@ -57,6 +49,14 @@ jobs:
       #     path: |
       #       Build/SourcePackages/repositories
       #     key: ${{ runner.os }}-source-packages-repositories-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+
+      # - name: build-products
+      #   uses: actions/cache@v2
+      #   id: build-products
+      #   with:
+      #     path: |
+      #       Build/Build/Products
+      #     key: ${{ runner.os }}-build-products-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       - name: Run Tests (No Cache)
         if: steps.workspace-state.outputs.cache-hit != 'true'
