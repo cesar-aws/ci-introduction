@@ -12,12 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: set mtime
-        run: |
-          set +e
-          git submodule foreach 'rev=HEAD; for f in $(git ls-tree -r -t --full-name --name-only "$rev") ; do     touch -t $(git log --pretty=format:%cd --date=format:%Y%m%d%H%M.%S -1 "$rev" -- "$f") "$f"; done'
-          rev=HEAD; for f in $(git ls-tree -r -t --full-name --name-only "$rev") ; do     touch -t $(git log --pretty=format:%cd --date=format:%Y%m%d%H%M.%S -1 "$rev" -- "$f") "$f"; done
-
       - name: Install Bundler
         run: gem install bundler
 
