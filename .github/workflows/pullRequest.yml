@@ -42,21 +42,21 @@ jobs:
             Build/SourcePackages/checkouts
           key: ${{ runner.os }}-source-packages-checkouts-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
-      # - name: source-packages-repositories
-      #   uses: actions/cache@v2
-      #   id: source-packages-repositories
-      #   with:
-      #     path: |
-      #       Build/SourcePackages/repositories
-      #     key: ${{ runner.os }}-source-packages-repositories-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+      - name: source-packages-repositories
+        uses: actions/cache@v2
+        id: source-packages-repositories
+        with:
+          path: |
+            Build/SourcePackages/repositories
+          key: ${{ runner.os }}-source-packages-repositories-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
-      # - name: build-products
-      #   uses: actions/cache@v2
-      #   id: build-products
-      #   with:
-      #     path: |
-      #       Build/Build/Products
-      #     key: ${{ runner.os }}-build-products-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+      - name: build-products
+        uses: actions/cache@v2
+        id: build-products
+        with:
+          path: |
+            Build/Build/Products
+          key: ${{ runner.os }}-build-products-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
       - name: Run Tests (No Cache)
         if: steps.workspace-state.outputs.cache-hit != 'true'
