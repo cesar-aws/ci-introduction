@@ -62,10 +62,6 @@ jobs:
             Build/Build/Products
           key: ${{ runner.os }}-build-products-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
 
-      - name: xcodebuild config
-        run: |
-          xcodebuild -resolvePackageDependencies -onlyUsePackageVersionsFromResolvedFile
-
       - name: Run Tests (No Cache)
         if: steps.workspace-state.outputs.cache-hit != 'true'
         run: bundle exec fastlane unit_test
