@@ -18,6 +18,14 @@ jobs:
       - name: Install gems
         run: bundle install
 
+      - name: workspace-state
+        uses: actions/cache@v2
+        id: workspace-state
+        with:
+          path: |
+            Build/SourcePackages/workspace-state.json
+          key: ${{ runner.os }}-workspace-state-${{ hashFiles(format('**/xcshareddata/swiftpm/Package.resolved')) }}
+
       - name: build-products
         uses: actions/cache@v2
         id: build-products
